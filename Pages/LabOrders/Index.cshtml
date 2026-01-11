@@ -1,0 +1,27 @@
+﻿@page
+@model HCAMiniEHR.Pages.LabOrders.IndexModel
+
+<h2>Lab Orders</h2>
+
+<a asp-page="Create" class="btn btn-primary mb-2">Add Lab Order</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Test Name</th>
+            <th>Status</th>
+            <th>Appointment ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var l in Model.LabOrders)
+        {
+            <tr>
+                <td>@l.TestName</td>
+                <td>@l.Status</td>
+                <td>@l.AppointmentID</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

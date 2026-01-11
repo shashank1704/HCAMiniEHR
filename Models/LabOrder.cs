@@ -15,6 +15,7 @@ namespace HCAMiniEHR.Models
         public string TestName { get; set; } = string.Empty;
         public string Status { get; set; } = "Pending";
         public string? ResultValue { get; set; }
+        public DateTime OrderedAt { get; set; } = DateTime.Now;
 
         public Appointment? Appointment { get; set; }
     }
