@@ -18,6 +18,7 @@
         @foreach (var p in Model.Patients)
         {
             <tr>
+                <td>@p.PatientID</td>
                 <td>@p.FirstName @p.LastName</td>
                 <td>@p.DateOfBirth.ToShortDateString()</td>
                 <td>@p.Gender</td>

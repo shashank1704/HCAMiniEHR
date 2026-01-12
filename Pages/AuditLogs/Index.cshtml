@@ -1,0 +1,31 @@
+﻿@page
+@model HCAMiniEHR.Pages.AuditLogs.IndexModel
+
+<h2>Audit Logs</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Table</th>
+            <th>Action</th>
+            <th>Record ID</th>
+            <th>Old Value</th>
+            <th>New Value</th>
+            <th>Changed At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var log in Model.AuditLogs)
+        {
+            <tr>
+                <td>@log.TableName</td>
+                <td>@log.ActionType</td>
+                <td>@log.RecordID</td>
+                <td>@log.OldValue</td>
+                <td>@log.NewValue</td>
+                <td>@log.ChangedAt</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
