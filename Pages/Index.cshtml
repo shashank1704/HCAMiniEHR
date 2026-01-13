@@ -1,10 +1,79 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">HCAMiniEHR Dashboard</h2>
+
+    <div class="row g-4">
+
+        <!-- Patients -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Patients</h5>
+                    <p class="card-text">Manage patient records</p>
+                    <a asp-page="/Patients/Index" class="btn btn-primary">
+                        Go to Patients
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointments -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Appointments</h5>
+                    <p class="card-text">Schedule and manage appointments</p>
+                    <a asp-page="/Appointments/Index" class="btn btn-success">
+                        Go to Appointments
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Orders -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Lab Orders</h5>
+                    <p class="card-text">Track lab test orders</p>
+                    <a asp-page="/LabOrders/Index" class="btn btn-warning">
+                        Go to Lab Orders
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports -->
+        <div class="col-md-6 mt-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Reports</h5>
+                    <p class="card-text">View analytics & LINQ reports</p>
+                    <a asp-page="/Reports/Index" class="btn btn-info">
+                        View Reports
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audit Logs (Optional but recommended) -->
+        <div class="col-md-6 mt-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Audit Logs</h5>
+                    <p class="card-text">Track database changes</p>
+                    <a asp-page="/AuditLogs/Index" class="btn btn-dark">
+                        View Audit Logs
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+

@@ -1,7 +1,5 @@
 ﻿using HCAMiniEHR.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace HCAMiniEHR.Data
 {
@@ -16,6 +14,8 @@ namespace HCAMiniEHR.Data
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<LabOrder> LabOrders { get; set; }
+        public DbSet<AuditLog> AuditLogs { get; set; }   
+        public DbSet<Doctor> Doctors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,16 @@ namespace HCAMiniEHR.Data
                 .WithOne(l => l.Appointment)
                 .HasForeignKey(l => l.AppointmentID)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Doctor>()
+                .HasMany(d => d.Patients)
+                 .WithOne(p => p.Doctor)
+                  .HasForeignKey(p => p.DoctorID);
+
+
+            // ✅ VERY IMPORTANT: Tell EF Core this table has a trigger
+            modelBuilder.Entity<Appointment>()
+                .ToTable(tb => tb.HasTrigger("trg_Appointment_Audit"));
         }
     }
 }
-

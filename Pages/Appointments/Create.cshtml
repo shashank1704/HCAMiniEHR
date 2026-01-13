@@ -1,0 +1,31 @@
+﻿@page
+@model HCAMiniEHR.Pages.Appointments.CreateModel
+
+<h2>Create Appointment</h2>
+
+<form method="post">
+    <div class="mb-2">
+        <label>Patient</label>
+        <select asp-for="Appointment.PatientID"
+                asp-items="Model.PatientList"
+                class="form-control"></select>
+    </div>
+
+    <div class="mb-2">
+        <label>Appointment Date</label>
+        <input asp-for="Appointment.AppointmentDate"
+               type="datetime-local"
+               class="form-control"
+               min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm")"
+               required />
+    </div>
+
+    <div class="mb-2">
+        <label>Doctor Name</label>
+        <input asp-for="Appointment.DoctorName" class="form-control" />
+    </div>
+
+    <button class="btn btn-success">Save</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
