@@ -16,7 +16,7 @@
         <input asp-for="Appointment.AppointmentDate"
                type="datetime-local"
                class="form-control"
-               min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm")"
+               min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
                required />
     </div>
 

@@ -3,6 +3,7 @@ using HCAMiniEHR.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace HCAMiniEHR.Pages.Appointments
 {
@@ -23,16 +24,44 @@ namespace HCAMiniEHR.Pages.Appointments
 
         public void OnGet()
         {
+            Appointment.AppointmentDate = DateTime.Now;
             LoadDropdowns();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            // 🔴 IMPORTANT: reload dropdown
             //LoadPatients();
 
             if (!ModelState.IsValid)
+            {
+                LoadDropdowns();
                 return Page();
+            }
+
+            // Check for duplicates
+            bool isPatientBooked = await _context.Appointments.AnyAsync(a => 
+                a.PatientID == Appointment.PatientID && 
+                a.AppointmentDate == Appointment.AppointmentDate);
+
+            bool isDoctorBooked = await _context.Appointments.AnyAsync(a => 
+                a.DoctorName == Appointment.DoctorName && 
+                a.AppointmentDate == Appointment.AppointmentDate);
+
+            if (isPatientBooked)
+            {
+                ModelState.AddModelError("Appointment.PatientID", "Patient already has an appointment at this time.");
+            }
+
+            if (isDoctorBooked)
+            {
+                ModelState.AddModelError("Appointment.DoctorName", "Doctor is already booked at this time.");
+            }
+
+            if (isPatientBooked || isDoctorBooked)
+            {
+                LoadDropdowns();
+                return Page();
+            }
 
             _context.Appointments.Add(Appointment);
             await _context.SaveChangesAsync();

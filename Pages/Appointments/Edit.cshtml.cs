@@ -45,6 +45,33 @@ namespace HCAMiniEHR.Pages.Appointments
                 return Page();
             }
 
+            // Check for duplicates
+            bool isPatientBooked = await _context.Appointments.AnyAsync(a => 
+                a.AppointmentID != Appointment.AppointmentID &&
+                a.PatientID == Appointment.PatientID && 
+                a.AppointmentDate == Appointment.AppointmentDate);
+
+            bool isDoctorBooked = await _context.Appointments.AnyAsync(a => 
+                a.AppointmentID != Appointment.AppointmentID &&
+                a.DoctorName == Appointment.DoctorName && 
+                a.AppointmentDate == Appointment.AppointmentDate);
+
+            if (isPatientBooked)
+            {
+                ModelState.AddModelError("Appointment.PatientID", "Patient already has an appointment at this time.");
+            }
+
+            if (isDoctorBooked)
+            {
+                ModelState.AddModelError("Appointment.DoctorName", "Doctor is already booked at this time.");
+            }
+
+            if (isPatientBooked || isDoctorBooked)
+            {
+                LoadDropdowns();
+                return Page();
+            }
+
             _context.Attach(Appointment).State = EntityState.Modified;
 
             try
