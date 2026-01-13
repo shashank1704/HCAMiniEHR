@@ -9,11 +9,13 @@
     <div class="mb-2">
         <label>First Name</label>
         <input asp-for="Patient.FirstName" class="form-control" />
+        <span asp-validation-for="Patient.FirstName" class="text-danger"></span>
     </div>
 
     <div class="mb-2">
         <label>Last Name</label>
         <input asp-for="Patient.LastName" class="form-control" />
+        <span asp-validation-for="Patient.LastName" class="text-danger"></span>
     </div>
 
     <div class="mb-2">

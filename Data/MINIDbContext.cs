@@ -42,7 +42,7 @@ namespace HCAMiniEHR.Data
                   .HasForeignKey(p => p.DoctorID);
 
 
-            // ✅ VERY IMPORTANT: Tell EF Core this table has a trigger
+            // VERY IMPORTANT: Tell EF Core this table has a trigger
             modelBuilder.Entity<Appointment>()
                 .ToTable(tb => tb.HasTrigger("trg_Appointment_Audit"));
         }

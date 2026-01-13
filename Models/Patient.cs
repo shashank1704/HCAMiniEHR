@@ -10,12 +10,15 @@ namespace HCAMiniEHR.Models
         public int PatientID { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z\s\-']+$", ErrorMessage = "Only letters, spaces, hyphens, and apostrophes are allowed.")]
         public string FirstName { get; set; } = string.Empty;
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z\s\-']+$", ErrorMessage = "Only letters, spaces, hyphens, and apostrophes are allowed.")]
         public string LastName { get; set; } = string.Empty;
 
         public DateTime DateOfBirth { get; set; }
+        [Required]
         public string? Gender { get; set; }
         public string? PhoneNumber { get; set; }
 
