@@ -26,9 +26,19 @@
     <div class="mb-2">
         <label>Gender</label>
         <input asp-for="Patient.Gender" class="form-control" />
+        <span asp-validation-for="Patient.Gender" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2">
+        <label>Primary Doctor</label>
+        <select asp-for="Patient.DoctorID" asp-items="Model.DoctorList" class="form-control">
+            <option value="">-- No Primary Doctor --</option>
+        </select>
     </div>
 
     <button class="btn btn-primary">Update</button>
     <a asp-page="Index" class="btn btn-secondary">Cancel</a>
 </form>
-
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

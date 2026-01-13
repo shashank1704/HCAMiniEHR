@@ -1,13 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using HCAMiniEHR.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Doctor
+namespace HCAMiniEHR.Models
 {
-    [Key]
-    public int DoctorID { get; set; }
-    public string DoctorName { get; set; } = "";
-    public string? Specialization { get; set; }
+    [Table("Doctor", Schema = "Mini")]
+    public class Doctor
+    {
+        [Key]
+        public int DoctorID { get; set; }
+        public string DoctorName { get; set; } = "";
+        public string? Specialization { get; set; }
 
-    public ICollection<Patient>? Patients { get; set; }
+        public ICollection<Patient>? Patients { get; set; }
+    }
 }
 

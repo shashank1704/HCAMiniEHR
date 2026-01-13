@@ -19,16 +19,17 @@ namespace HCAMiniEHR.Pages.Appointments
         public Appointment Appointment { get; set; } = new();
 
         public SelectList PatientList { get; set; } = null!;
+        public SelectList DoctorList { get; set; } = null!;
 
         public void OnGet()
         {
-            LoadPatients();
+            LoadDropdowns();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             // 🔴 IMPORTANT: reload dropdown
-            LoadPatients();
+            //LoadPatients();
 
             if (!ModelState.IsValid)
                 return Page();
@@ -39,12 +40,17 @@ namespace HCAMiniEHR.Pages.Appointments
             return RedirectToPage("Index");
         }
 
-        private void LoadPatients()
+        private void LoadDropdowns()
         {
             PatientList = new SelectList(
                 _context.Patients.ToList(),
                 "PatientID",
                 "FirstName");
+
+            DoctorList = new SelectList(
+                _context.Doctors.ToList(),
+                "DoctorName",
+                "DoctorName");
         }
     }
 }

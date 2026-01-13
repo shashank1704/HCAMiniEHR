@@ -37,6 +37,7 @@ namespace HCAMiniEHR.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Doctor>()
+                .ToTable("Doctor", "Mini")
                 .HasMany(d => d.Patients)
                  .WithOne(p => p.Doctor)
                   .HasForeignKey(p => p.DoctorID);

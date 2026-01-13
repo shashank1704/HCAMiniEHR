@@ -12,6 +12,7 @@
             <th>Date</th>
             <th>Doctor</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -22,8 +23,11 @@
                 <td>@a.AppointmentDate</td>
                 <td>@a.DoctorName</td>
                 <td>@a.Status</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@a.AppointmentID" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-page="./Delete" asp-route-id="@a.AppointmentID" class="btn btn-sm btn-danger">Delete</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
-
